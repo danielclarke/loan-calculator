@@ -1,11 +1,18 @@
 import React from 'react';
+import BarChart from './BarChart';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  // const data = [25, 7, 5, 26, 11, 8, 25, 14, 23, 19, 14, 11, 22, 29, 11, 13, 12, 17, 18, 10, 24, 18, 25, 9, 3]
+  setInterval(App, 1000);
+  const data = [...Array(25)].map(() => {return Math.random() * 20});
   return (
     <div className="App">
-      <header className="App-header">
+      <div className="Chart">
+        <BarChart container={".Chart"} data={data} width={700} height={300}/>
+      </div>
+      {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -18,9 +25,8 @@ function App() {
         >
           Learn React
         </a>
-      </header>
+      </header> */}
     </div>
   );
 }
-
 export default App;
