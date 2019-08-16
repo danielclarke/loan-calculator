@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <div className="Chart">
-        <BarChart container={".Chart"} data={data} width={700} height={300}/>
+        <BarChart container={".Chart"} data={data} width={500} height={100}/>
       </div>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

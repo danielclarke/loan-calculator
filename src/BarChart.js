@@ -13,20 +13,19 @@ class BarChart extends Component {
     }
 
     drawChart() {
-        const data = [...Array(25)].map(() => {return Math.random() * 20});
         const svg = d3.select(this.props.container)
             .append("svg")
             .attr("width", this.props.width)
-            .attr("height", this.props.width);
+            .attr("height", this.props.height);
 
-        svg.selectAll("circle")
-            .data(data)
+        svg.selectAll("rect")
+            .data(this.props.data)
             .enter()
-            .append("circle")
-            .attr("cx", (d, i) => {return i * 10})
-            .attr("cy", (d, i) => {return d * 10})
-            .attr("r", () => {return Math.random() * 10})
-            .attr("fill", () => {return `rgba(${Math.random() * 255}, ${Math.random() * 255}, ${Math.random() * 255}, ${Math.random()})`});
+            .append("rect")
+            .attr("x", (d, i) => {return i * (this.props.width / this.props.data.length)})
+            .attr("y", (d, i) => {return this.props.height - d})
+            .attr("width", (d, i) => {return this.props.width / this.props.data.length - 1})
+            .attr("height", (d, i) => {return d});
     }
 
     refresh() {
