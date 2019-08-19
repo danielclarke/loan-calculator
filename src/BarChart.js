@@ -44,7 +44,7 @@ class BarChart extends Component {
         bar.append("rect")
             .attr("y", (d, i) => {return yScale(d)})
             .attr("width", (d, i) => {return xScale(1) - 1})
-            .attr("height", (d, i) => {return yScale(0)});
+            .attr("height", (d, i) => {return yScale(0) - yScale(d)});
 
         // bar.append("text")
         //     .attr("x", (d, i) => {return 0})
