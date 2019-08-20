@@ -28,6 +28,17 @@
   grid-template-columns: 1fr;
 }
 
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

@@ -22,11 +22,14 @@ class BarChart extends Component {
 
         const xScale = d3.scaleLinear()
             .domain([0, this.props.data.length])
-            .range([0, this.props.width - margin.left]);
+            .range([0, this.props.width - margin.left - margin.right]);
         
         const yScale = d3.scaleLinear()
             .domain([0, this.props.height])
-            .range([this.props.height - margin.top, 0]);
+            .range([this.props.height - margin.top - margin.bottom, 0]);
+
+        const xAxis = d3.axisBottom(xScale);
+        const yAxis = d3.axisLeft(yScale);
 
         const chart = d3.select(this.props.container)
             .append("svg")
@@ -35,23 +38,23 @@ class BarChart extends Component {
             .append("g")
             .attr("transform", (d, i) => {return `translate(${margin.left}, ${margin.top})`});
 
-        const bar = chart.selectAll("g")
+        chart.append("g")
+            .attr("class", "x axis")
+            .attr("transform", `translate(0, ${yScale(0)})`)
+            .call(xAxis);
+        
+        chart.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+        chart.selectAll(".bar")
             .data(this.props.data)
             .enter()
-            .append("g")
-            .attr("transform", (d, i) => {return `translate(${xScale(i)}, ${0})`});
-        
-        bar.append("rect")
+            .append("rect")
+            .attr("transform", (d, i) => {return `translate(${xScale(i)}, ${0})`})
             .attr("y", (d, i) => {return yScale(d)})
             .attr("width", (d, i) => {return xScale(1) - 1})
             .attr("height", (d, i) => {return yScale(0) - yScale(d)});
-
-        // bar.append("text")
-        //     .attr("x", (d, i) => {return 0})
-        //     .attr("y", (d, i) => {return this.props.height - d + 3})
-        //     .attr("dy", ".75em")
-        //     .attr("fill", "white")
-        //     .text((d) => {return d});
     }
 
     refresh() {

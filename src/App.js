@@ -6,7 +6,7 @@ import './App.css';
 function App() {
   // const data = [25, 7, 5, 26, 11, 8, 25, 14, 23, 19, 14, 11, 22, 29, 11, 13, 12, 17, 18, 10, 24, 18, 25, 9, 3]
   // setInterval(App, 1000);
-  const data = [...Array(25)].map(() => {return Math.random() * 500});
+  const data = [...Array(25)].map((el, i) => {return Math.sin(2 * Math.PI * i / 25) * 500});
   return (
     <div className="App">
       <div className="Chart">
