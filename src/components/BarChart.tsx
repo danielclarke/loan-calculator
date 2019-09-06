@@ -1,9 +1,20 @@
-import React, {Component} from 'react';
+import * as React from 'react';
+import {Component} from 'react';
 import * as d3 from 'd3';
 
+interface BarChartState {
+    tick: number;
+}
 
-class BarChart extends Component {
-    constructor(props) {
+interface BarChartProps {
+    height: number;
+    width: number;
+    data: Array<number>;
+    container: string;
+}
+
+class BarChart extends Component<BarChartProps, BarChartState> {
+    constructor(props: BarChartProps) {
         super(props);
         this.state = {tick: 0};
     }
@@ -61,7 +72,7 @@ class BarChart extends Component {
         setInterval(() => {this.setState({tick: this.state.tick + 1000})}, 1000);
     }
 
-    render() {
+    render(): React.ReactNode {
         this.drawChart();
         //this.refresh()
         return null;
