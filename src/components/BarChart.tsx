@@ -2,10 +2,6 @@ import * as React from 'react';
 import {Component} from 'react';
 import * as d3 from 'd3';
 
-interface BarChartState {
-    tick: number;
-}
-
 interface BarChartProps {
     height: number;
     width: number;
@@ -13,11 +9,7 @@ interface BarChartProps {
     container: string;
 }
 
-class BarChart extends Component<BarChartProps, BarChartState> {
-    constructor(props: BarChartProps) {
-        super(props);
-        this.state = {tick: 0};
-    }
+class BarChart extends Component<BarChartProps> {
 
     componentDidMount() {
         this.drawChart();
@@ -27,7 +19,7 @@ class BarChart extends Component<BarChartProps, BarChartState> {
         const margin = {
             top: this.props.height * 1 / 25,
             bottom: this.props.height * 3 / 50,
-            left: this.props.width * 1 / 24,
+            left: this.props.width * 1 / 20,
             right: this.props.width * 1 / 32, 
         };
 
@@ -36,7 +28,7 @@ class BarChart extends Component<BarChartProps, BarChartState> {
             .range([0, this.props.width - margin.left - margin.right]);
         
         const yScale = d3.scaleLinear()
-            .domain([0, this.props.height])
+            .domain([0, Math.max(...this.props.data)])
             .range([this.props.height - margin.top - margin.bottom, 0]);
 
         const xAxis = d3.axisBottom(xScale);
@@ -68,13 +60,8 @@ class BarChart extends Component<BarChartProps, BarChartState> {
             .attr("height", (d, i) => {return yScale(0) - yScale(d)});
     }
 
-    refresh() {
-        setInterval(() => {this.setState({tick: this.state.tick + 1000})}, 1000);
-    }
-
     render(): React.ReactNode {
         this.drawChart();
-        //this.refresh()
         return null;
     }
 }

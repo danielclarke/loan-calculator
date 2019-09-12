@@ -1,15 +1,31 @@
 import * as React from 'react';
 import BarChart from './BarChart';
+import ApiReader from './ApiReader';
 
 function App() {
-  // const data = [25, 7, 5, 26, 11, 8, 25, 14, 23, 19, 14, 11, 22, 29, 11, 13, 12, 17, 18, 10, 24, 18, 25, 9, 3]
-  // setInterval(App, 1000);
-  const data = [...Array(25)].map((el, i) => {return Math.sin(2 * Math.PI * i / 25) * 250 + 250});
+
+  const s = new URLSearchParams(window.location.search);
+  const debt = parseFloat(s.get('loan'));
+  const rate = parseFloat(s.get('rate')) / 100 / 12;
+  const repayment = parseFloat(s.get('repayment'));
+
+  let data = [debt]
+
+  for (let i = 0; i < 30 * 12; i++) {
+    if (data[data.length - 1] * (1 + rate) - repayment < 0)
+    {
+      break;
+    }
+    data.push(data[data.length - 1] * (1 + rate) - repayment);
+  }
   return (
     <div className="App">
       <div className="Chart">
         <BarChart container={".Chart"} data={data} width={960} height={500}/>
       </div>
+      {/* <div className="ApiReader">
+        <ApiReader />
+      </div> */}
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>

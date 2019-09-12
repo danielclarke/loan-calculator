@@ -5,11 +5,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "start": "http-server dist"
+    "start": "http-server dist",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "homepage": "https://danielclarke.github.io/loan-calculator",
   "devDependencies": {
     "@types/react": "^16.9.2",
     "@types/react-dom": "^16.9.0",
@@ -27,7 +30,9 @@
   "dependencies": {
     "@types/d3": "^5.7.2",
     "d3": "^5.11.0",
+    "gh-pages": "^2.1.1",
     "react": "^16.9.0",
-    "react-dom": "^16.9.0"
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1"
   }
 }
